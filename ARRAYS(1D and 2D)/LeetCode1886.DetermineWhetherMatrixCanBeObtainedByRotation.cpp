@@ -29,7 +29,7 @@
 // 1 <= n <= 10
 // mat[i][j] and target[i][j] are either 0 or 1.
 
-// BRUTEFORCE SOLUTION :
+// OPTIMISED SOLUTION :
 class Solution {
 public:
     bool findRotation(vector<vector<int>>& mat, vector<vector<int>>& target) {
