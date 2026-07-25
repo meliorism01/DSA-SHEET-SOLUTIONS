@@ -56,3 +56,40 @@ class Solution {
        return ans;
     }
 };
+
+
+//Fully Optimised:
+// reduced number of compaerisons
+// comparing consecutive pairs
+// greater one is overwritten as max element
+// smaller one is overwritten as min element
+// if both are equal, compare first one with the maix and min
+// for an array/vector with odd length use if(n%2==1) case and compare n-1th element with both max and min
+class Solution {
+  public:
+    vector<int> getMinMax(vector<int> &arr) {
+       int n = arr.size();
+       int maxx = INT_MIN;
+       int minn = INT_MAX;
+       for(int i =0; i<n-1; i+=2){
+           if(arr[i]>arr[i+1]){
+          minn = min(minn, arr[i+1]);
+          maxx = max(maxx, arr[i]);
+           } else if (arr[i]<arr[i+1]){
+             minn = min(minn, arr[i]);
+             maxx = max(maxx, arr[i+1]);
+           }else{
+               minn = min(minn, arr[i]);
+               maxx = max(maxx, arr[i]);
+           }
+       }
+       if(n%2==1){
+       minn = min(minn, arr[n-1]);
+       maxx = max(maxx, arr[n-1]);
+       }
+       vector<int>ans;
+       ans.push_back(minn);
+       ans.push_back(maxx);
+       return ans;
+    }
+};
