@@ -115,3 +115,9 @@ public:
 };
 
 // in this approach we compare by using i-1 so that it does not overflow and no extra use of %n
+// The algorithm has two checks:
+// How many times does the order decrease?
+// More than one decrease → impossible.
+// If there is exactly one decrease, does the last element correctly wrap around to the first?
+// last <= first → valid rotation.
+// last > first → invalid rotation.
