@@ -108,7 +108,48 @@ public:
 };
 
 
-
-
-
+//Optimal Approach:
+// using two binary searches :
+// one for the first occurrence{whenever we find arr[mid]= target, we do high =mid-1}
+// another for the last occurrece{whenever we find arr[mid]= target, we do low = mid+1}
+class Solution {
+	public:
+	vector<int> find(vector<int>& arr, int x) {
+		int n = arr.size();
+		int low = 0;
+		int low1 = 0;
+		int high = n - 1;
+		int high1 = n - 1;
+		vector<int> ans = {-1, -1};
+		while (low <= high) {
+			int mid = low + (high - low) / 2;
+			
+			if (arr[mid] == x) {
+				ans[0] = mid;
+				high = mid - 1; // Keep searching left
+			}
+			else if (arr[mid] < x) {
+				low = mid + 1;
+			}
+			else {
+				high = mid - 1;
+			}
+		}
+		while (low1 <= high1) {
+			int mid = low1 + (high1 - low1) / 2;
+			
+			if (arr[mid] == x) {
+				ans[1] = mid;
+				low1 = mid + 1; // Keep searching right
+			}
+			else if (arr[mid] < x) {
+				low1 = mid + 1;
+			}
+			else {
+				high1 = mid - 1;
+			}
+		}
+		return ans;
+	}
+};
 
