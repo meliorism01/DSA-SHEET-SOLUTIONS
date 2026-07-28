@@ -19,8 +19,33 @@
 
 
 
+//Brute Force Solution:
+// keep the ans vector {-1, -1} by default
+// while traversing the giver array, check if the element is = target;
+// if it is so, push it into ans vector in the place of first ocurrence, using an if condition
+//  if (ans[0] == -1) : to avoid pushing other occurences in place of first
+// keep updation last occurrence
+class Solution {
+public:
+    vector<int> find(vector<int>& arr, int x) {
+        vector<int> ans = {-1, -1};
 
-// BruteForce Solution:
+        for (int i = 0; i < arr.size(); i++) {
+            if (arr[i] == x) {
+                if (ans[0] == -1)
+                    ans[0] = i;   // First occurrence
+
+                ans[1] = i;       // Keep updating last occurrence
+            }
+        }
+
+        return ans;
+    }
+};
+
+
+
+// BruteForce Solution(keeping given constraints in mind):
 // Used Binary Search
 // In case arr[mid]== x;
 // push the value of mid for both first and last occurence(){just in case the integer occurs only one time}
@@ -81,5 +106,9 @@ public:
         return ans;
     }
 };
+
+
+
+
 
 
