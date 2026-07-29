@@ -1,8 +1,8 @@
 // Implement basic stack operations using linkedlist i.e.
 // push
 // pop
-// peek
-// display
+// peek(to display the top element)
+// display(to display all the elements)
 
 
 
