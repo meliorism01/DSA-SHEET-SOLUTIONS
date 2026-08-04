@@ -119,3 +119,54 @@ public:
         return ans;
     }
 };
+
+
+
+
+//Optimal Solution:
+// Find the minimum and maximum elements in the array.
+// Create a presence array to mark the existing elements.
+// Mark each element of the input array as present.
+// Traverse all numbers between the minimum and maximum values.
+// If a number is not marked as present,
+// add it to the answer vector as a missing element.
+// Return the list of missing elements.
+// Time Complexity:
+// Finding the minimum element    : O(n)
+// Finding the maximum element    : O(n)
+// Marking elements in the vector : O(n)
+// Traversing the range           : O(range)
+// Overall Time Complexity        : O(n + range)
+// Space Complexity:
+// Presence vector                : O(mx)
+// Answer vector                  : O(k)
+// Auxiliary Space                : O(mx)
+// Total Space Complexity         : O(mx + k)
+
+class Solution {
+public:
+    vector<int> findMissingElements(vector<int>& nums) {
+
+        int mn = *min_element(nums.begin(), nums.end());
+        int mx = *max_element(nums.begin(), nums.end());
+
+        // Presence array
+        vector<int> present(mx + 1, 0);
+
+        // Mark all existing elements
+        for (int num : nums) {
+            present[num] = 1;
+        }
+
+        vector<int> ans;
+
+        // Find missing elements
+        for (int i = mn + 1; i < mx; i++) {
+            if (present[i] == 0) {
+                ans.push_back(i);
+            }
+        }
+
+        return ans;
+    }
+};
