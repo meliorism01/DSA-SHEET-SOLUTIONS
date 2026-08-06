@@ -34,7 +34,7 @@
 
 
 
-//BruteForce Approach :
+//BruteForce(essentially optimal) Approach :
 // Iterate through every number starting from n.
 // Compute the product of its digits.
 // Check if the digit product is divisible by t.
