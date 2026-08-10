@@ -47,3 +47,33 @@ public:
         return 0;
     }
 };
+
+
+
+
+//BruteForce Approach after space optimisatiom : Linear Scan Approach
+// Time Complexity : O(n)
+// Space Complexity : O(1)
+// checked whether the size of given array is 1 then returned the only existing element
+// then checked if the first for last element has unique occurence
+// then iterated through the array and checked if the current element is not equal to its previous and next element then returned the current element
+class Solution {
+public:
+    int singleNonDuplicate(vector<int>& nums) {
+        int n = nums.size();
+        if(n==1){
+           return nums[0]; 
+        }
+        else if(nums[0]!=nums[1]){
+            return nums[0];
+        }else if(nums[n-1]!=nums[n-2]){
+            return nums[n-1];
+        }
+        for(int i = 1; i<nums.size()-1; i++){
+            if(nums[i]!=nums[i+1]&&nums[i]!=nums[i-1]){
+                return nums[i];
+            }
+        }
+        return 0;
+    }
+};
