@@ -144,3 +144,47 @@ public:
         return maxi;
     }
 };
+
+
+
+// Final brute force approach :
+// Count the number of windows in which each element appears
+// seen[x] ensures that an element is counted only once per window
+// i + 1 acts as a unique ID for the current window
+// freq[x] represents the number of different windows containing x
+// Find the largest element whose frequency is exactly 1
+// Time: O(nk)
+// Space: O(max(nums))
+class Solution {
+public:
+    int largestInteger(vector<int>& nums, int k) {
+        int n = nums.size();
+
+        int max_ele = *max_element(nums.begin(), nums.end());
+
+        vector<int> freq(max_ele + 1, 0);
+        vector<int> seen(max_ele + 1, 0);
+
+        for (int i = 0; i + k <= n; i++) {
+
+            for (int j = i; j < i + k; j++) {
+                int x = nums[j];
+
+                if (seen[x] != i + 1) {
+                    freq[x]++;
+                    seen[x] = i + 1;
+                }
+            }
+        }
+
+        int ans = -1;
+
+        for (int i = 0; i <= max_ele; i++) {
+            if (freq[i] == 1) {
+                ans = max(ans, i);
+            }
+        }
+
+        return ans;
+    }
+};
