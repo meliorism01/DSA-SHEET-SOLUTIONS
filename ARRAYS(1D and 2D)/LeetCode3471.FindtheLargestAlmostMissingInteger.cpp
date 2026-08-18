@@ -97,3 +97,50 @@ public:
 // -1
 // here the output is 7 but the expected output is -1
 // because 7 appears in 2 subarrays of size 3: [1,7,7] and [7,7,?] (the last subarray is incomplete but still counts as a subarray of size 3).
+
+
+
+//Another Bruteforce fail :
+// in this approach i tried to find the frequency of each element in the array and then checked if any element has frequency 1 then return that element.
+// it pased almost all the test cases but failed for some test cases.
+// example : Input
+// nums =
+// [8,1,8]
+// k =
+// 3
+// Use Testcase
+// Output
+// 1
+// Expected
+// 8
+// here the output is 1 but the expected output is 8
+// because 8 appears twice but in only one subarray of size 3: [8,1,8] and 1 appears in only one subarray of size 3: [8,1,8] but 8 is the largest almost missing integer.
+// so this approach would fail in the most cases where the size of the window is equal to the size of the array and the first and last elements are equal and the middle elements are different from them.
+
+class Solution {
+public:
+    int largestInteger(vector<int>& nums, int k) {
+        int n = nums.size();
+
+        int max_ele = *max_element(nums.begin(), nums.end());
+        vector<int> freq(max_ele + 1, 0);
+
+        for(int i = 0; i + k <= n; i++) {
+            for(int j = i; j < i + k; j++) {
+                freq[nums[j]]++;
+            }
+        }
+
+        int maxi = -1;
+
+        for(int i = 0; i <= max_ele; i++) {
+            if(freq[i] == 1) {
+                maxi = max(maxi, i);
+            }else if(freq[i]==k&&k==n){
+                maxi = i;
+            }
+        }
+
+        return maxi;
+    }
+};
