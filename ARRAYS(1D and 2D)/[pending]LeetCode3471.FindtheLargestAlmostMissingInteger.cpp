@@ -188,3 +188,34 @@ public:
         return ans;
     }
 };
+
+
+// One more brute force approach :
+// A bit more clear and understandable approach
+// Here we are calculating the frequency of each element from the each window existing the array, and returning the largest element whose frequency is exactly 1
+// there is an edge case if the size of the window is equal to the size of the array then we can return the max element from the array as it will be the largest almost missing integer
+// int x = n - k + 1; i.e, the number of windows in the array
+// time complexity : O(nk) and space complexity : O(max(nums))
+class Solution {
+public:
+    int largestInteger(vector<int>& nums, int k) {
+        int n = nums.size();
+        int x = n - k + 1;
+        int max = *max_element(nums.begin(), nums.end());
+        vector<int> freq(max + 1, 0);
+        if(x==1){
+            return max;
+        }
+        for (int i = 0; i < x; i++) {
+            for (int j = i; j < i + k; j++) {
+                freq[nums[j]]++;
+            }
+        }
+        for (int i = freq.size() - 1; i >= 0; i--) {
+            if (freq[i] == 1) {
+                return i;
+            }
+        }
+        return -1;
+    }
+};
