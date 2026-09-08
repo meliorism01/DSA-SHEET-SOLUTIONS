@@ -58,3 +58,38 @@ public:
         return 0;
     }
 };
+
+
+// Optimised Approach : Binary Search Approach
+// Time Complexity : O(log n)
+// Space Complexity : O(1)
+// 
+
+
+class Solution {
+public:
+    int findPeakElement(vector<int>& nums) {
+        int n = nums.size();
+
+        int low = 0;
+        int high = n - 1;
+
+        while (low < high) {
+            int mid = low + (high - low) / 2;
+
+            if (nums[mid] < nums[mid + 1]) {
+                // We are on an increasing slope.
+                // A peak must exist on the right.
+                low = mid + 1;
+            }
+            else {
+                // We are on a decreasing slope.
+                // mid itself could be the peak.
+                high = mid;
+            }
+        }
+
+        return low;
+    }
+};
+
